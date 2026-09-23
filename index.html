@@ -3,113 +3,234 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Joks Store - الموقع الرسمي للشحن والخدمات الرقمية</title>
+    <title>JOKS STORE - المتجر الشامل للألعاب والسوشيال ميديا</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', Tahoma, sans-serif; }
-        body { background-color: #0c0f1d; color: #fff; padding: 20px; text-align: center; }
-        .container { max-width: 500px; margin: auto; background: #151a30; padding: 25px; border-radius: 20px; box-shadow: 0 8px 25px rgba(0,0,0,0.6); border: 1px solid #232a4d; }
-        .logo-area { margin-bottom: 20px; }
-        .logo-area h1 { color: #38bdf8; font-size: 26px; font-weight: bold; margin-bottom: 5px; text-shadow: 0 0 10px rgba(56,189,248,0.4); }
-        .logo-area p { color: #94a3b8; font-size: 13px; }
+        body { background: #080303; color: #fff; overflow-x: hidden; }
         
-        .section-box { background: #1e2548; border: 1px solid #2d3765; border-radius: 12px; padding: 15px; margin-bottom: 15px; text-align: right; }
-        .section-box label { display: block; color: #cbd5e1; font-size: 14px; margin-bottom: 8px; font-weight: bold; }
+        .bg-network {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                radial-gradient(circle, rgba(220, 20, 60, 0.15) 1px, transparent 1px),
+                linear-gradient(to right, rgba(220, 20, 60, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(220, 20, 60, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1;
+        }
+
+        header { background: rgba(15, 5, 5, 0.95); border-bottom: 2px solid #2a0808; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 20px rgba(220,20,60,0.2); }
+        .logo { font-size: 18px; font-weight: bold; color: #fff; letter-spacing: 1px; }
+        .logo span { color: #dc2626; }
         
-        input, select { width: 100%; padding: 12px; background: #0c0f1d; border: 1px solid #3b82f6; color: #fff; border-radius: 8px; font-size: 14px; outline: none; margin-bottom: 5px; }
-        input:focus, select:focus { border-color: #60a5fa; box-shadow: 0 0 8px rgba(96,165,250,0.3); }
+        .user-badge { background: #1a0505; border: 1px solid #3a0d0d; padding: 6px 14px; border-radius: 20px; font-size: 13px; color: #fca5a5; display: flex; align-items: center; gap: 6px; }
 
-        .pay-card { background: #0c0f1d; border: 1px dashed #10b981; padding: 12px; border-radius: 8px; margin-bottom: 15px; text-align: right; font-size: 13px; color: #e2e8f0; }
-        .pay-num { color: #34d399; font-weight: bold; font-size: 15px; }
+        .container { max-width: 600px; margin: 20px auto; padding: 0 15px; }
 
-        .submit-btn { background: linear-gradient(135deg, #2563eb, #1d4ed8); color: white; border: none; padding: 14px; width: 100%; border-radius: 10px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 12px rgba(37,99,235,0.4); }
-        .submit-btn:hover { background: linear-gradient(135deg, #1d4ed8, #1e40af); transform: translateY(-2px); }
+        .hero { background: rgba(20, 8, 8, 0.85); border: 1px solid #3a0d0d; border-radius: 16px; padding: 25px 20px; text-align: center; margin-bottom: 20px; box-shadow: 0 8px 30px rgba(0,0,0,0.8); }
+        .hero h2 { font-size: 22px; font-weight: bold; margin-bottom: 8px; color: #fff; }
+        .hero h2 span { color: #dc2626; }
+        .hero p { color: #9ca3af; font-size: 13px; }
 
-        .footer-note { margin-top: 20px; font-size: 12px; color: #64748b; }
+        .section-title { font-size: 17px; font-weight: bold; color: #fff; margin: 25px 0 12px 0; border-right: 4px solid #dc2626; padding-right: 10px; }
+
+        .card { background: rgba(18, 6, 6, 0.9); border: 1px solid #2d0a0a; border-radius: 14px; padding: 16px; margin-bottom: 12px; transition: 0.3s; box-shadow: 0 6px 20px rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: space-between; }
+        .card:hover { border-color: #dc2626; transform: translateY(-2px); }
+        
+        .card-info h3 { font-size: 16px; color: #fff; margin-bottom: 3px; }
+        .card-info p { font-size: 12px; color: #9ca3af; }
+
+        .btn-red { background: linear-gradient(135deg, #ef4444, #b91c1c); color: #fff; border: none; padding: 10px 18px; border-radius: 8px; font-size: 13px; font-weight: bold; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4); text-decoration: none; display: inline-block; text-align: center; }
+        .btn-red:hover { opacity: 0.9; }
+
+        .package-grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
+        .package-card { background: rgba(18, 6, 6, 0.95); border: 1px solid #3a0d0d; border-radius: 14px; padding: 20px; text-align: center; box-shadow: 0 5px 20px rgba(0,0,0,0.7); }
+        .package-card h4 { font-size: 18px; color: #fff; margin-bottom: 5px; }
+        .package-card .price { font-size: 20px; color: #ef4444; font-weight: bold; margin: 8px 0; }
+        
+        .input-group { margin-bottom: 15px; text-align: right; }
+        .input-group label { display: block; font-size: 12px; color: #d1d5db; margin-bottom: 5px; }
+        .input-group input { width: 100%; padding: 11px; background: #050101; border: 1px solid #3a0d0d; border-radius: 8px; color: #fff; font-size: 14px; outline: none; }
+        .input-group input:focus { border-color: #ef4444; }
+
+        .back-link { background: none; border: none; color: #ef4444; font-size: 14px; cursor: pointer; margin-bottom: 15px; display: inline-flex; align-items: center; gap: 5px; font-weight: bold; }
+
+        .footer { text-align: center; margin: 30px 0; font-size: 12px; color: #6b7280; border-top: 1px solid #1a0505; padding-top: 15px; }
     </style>
 </head>
 <body>
 
+<div class="bg-network"></div>
+
+<header>
+    <div class="logo">JOKS <span>STORE</span></div>
+    <div class="user-badge">👤 يوسف</div>
+</header>
+
 <div class="container">
-    <div class="logo-area">
-        <h1>JOKS STORE</h1>
-        <p>⚡ المنصة الشاملة لشحن الألعاب وخدمات السوشيال ميديا ⚡</p>
+    
+    <!-- الصفحة الرئيسية -->
+    <div id="homeView">
+        <div class="hero">
+            <h2>المتجر الشامل للألعاب <span>وخدمات السوشيال</span></h2>
+            <p>⚡ شحن فوري للألعاب وزيادة متابعين السوشيال ميديا بأفضل الأسعار وأعلى أمان.</p>
+        </div>
+
+        <div class="section-title">🎮 قسم ألعاب الفيديو والشحن</div>
+
+        <!-- 8 Ball Pool -->
+        <div class="card">
+            <div class="card-info">
+                <h3>8 Ball Pool 🎱</h3>
+                <p>كوينز وكاش فوري بالـ ID</p>
+            </div>
+            <button class="btn-red" onclick="showPackages('8 Ball Pool', [
+                {name: 'Coins 20,000', price: '20.00 جنيه'},
+                {name: 'Coins 52,000', price: '45.00 جنيه'},
+                {name: '110 Cash', price: '90.00 جنيه'},
+                {name: '250 Cash', price: '165.00 جنيه'},
+                {name: '800 Cash', price: '450.00 جنيه'}
+            ])">عرض الباقات</button>
+        </div>
+
+        <!-- PUBG Mobile -->
+        <div class="card">
+            <div class="card-info">
+                <h3>PUBG Mobile 🎮</h3>
+                <p>شحن شدات فوري وآمن</p>
+            </div>
+            <button class="btn-red" onclick="showPackages('PUBG Mobile', [
+                {name: '60 شدة', price: '60.00 جنيه'},
+                {name: '325 شدة', price: '270.00 جنيه'},
+                {name: '660 شدة', price: '620.00 جنيه'}
+            ])">عرض الباقات</button>
+        </div>
+
+        <!-- Free Fire -->
+        <div class="card">
+            <div class="card-info">
+                <h3>Free Fire 🔥</h3>
+                <p>شحن جواهر فري فاير</p>
+            </div>
+            <button class="btn-red" onclick="showPackages('Free Fire', [
+                {name: '100 جوهرة', price: '55.00 جنيه'},
+                {name: '310 جوهرة', price: '165.00 جنيه'},
+                {name: '520 جوهرة', price: '270.00 جنيه'}
+            ])">عرض الباقات</button>
+        </div>
+
+        <!-- Call of Duty -->
+        <div class="card">
+            <div class="card-info">
+                <h3>Call of Duty 🎯</h3>
+                <p>شحن كود كوينز رسمي</p>
+            </div>
+            <button class="btn-red" onclick="showPackages('Call of Duty', [
+                {name: '80 كوينز', price: '70.00 جنيه'},
+                {name: '420 كوينز', price: '340.00 جنيه'}
+            ])">عرض الباقات</button>
+        </div>
+
+        <div class="section-title">📈 خدمات السوشيال ميديا</div>
+
+        <!-- TikTok Services -->
+        <div class="card">
+            <div class="card-info">
+                <h3>تيك توك - TikTok 🎵</h3>
+                <p>زيادة متابعين، لايكات ومشاهدات</p>
+            </div>
+            <button class="btn-red" onclick="showPackages('خدمات تيك توك', [
+                {name: '1000 متابع حقيقي', price: '80.00 جنيه'},
+                {name: '5000 لايك فيديو', price: '50.00 جنيه'},
+                {name: '10,000 مشاهدة', price: '25.00 جنيه'}
+            ])">عرض الخدمات</button>
+        </div>
+
+        <!-- Instagram Services -->
+        <div class="card">
+            <div class="card-info">
+                <h3>انستجرام - Instagram 📸</h3>
+                <p>متابعين وتفاعل لحسابك</p>
+            </div>
+            <button class="btn-red" onclick="showPackages('خدمات انستجرام', [
+                {name: '1000 متابع انستجرام', price: '75.00 جنيه'},
+                {name: '2000 لايك منشور', price: '40.00 جنيه'}
+            ])">عرض الخدمات</button>
+        </div>
+
+        <div class="section-title">📞 تواصل ودعم المتجر</div>
+        <div class="card" style="text-align: center; display: block; padding: 20px;">
+            <p style="font-size: 13px; color: #9ca3af; margin-bottom: 12px;">للدعم الفني وإرسال إيصالات الدفع مباشرة:</p>
+            <a href="https://wa.me/201001477719" target="_blank" class="btn-red" style="background: linear-gradient(135deg, #22c55e, #15803d); width: 100%;">تواصل عبر الواتساب 💬</a>
+        </div>
     </div>
 
-    <form onsubmit="sendOrderToWhatsApp(event)">
-        
-        <div class="section-box">
-            <label>👤 اسم العميل:</label>
-            <input type="text" id="clientName" placeholder="اكتب اسمك الثنائي هنا" required>
+    <!-- شاشة عرض الباقات والخدمات -->
+    <div id="packageView" style="display: none;">
+        <button class="back-link" onclick="goHome()">← العودة للرئيسية</button>
+        <div class="section-title" id="selectedSectionTitle">الباقات المتاحة</div>
+
+        <div class="package-grid" id="packagesList">
+            <!-- تعبئة تلقائية -->
         </div>
-
-        <div class="section-box">
-            <label>🔗 رابط الحساب أو الـ ID المطلوب:</label>
-            <input type="text" id="clientID" placeholder="أدخل لينك الحساب أو الـ ID بدقة" required>
-        </div>
-
-        <div class="section-box">
-            <label>📦 اختر الخدمة أو الباقة:</label>
-            <select id="serviceSelect" required>
-                <option value="" disabled selected>-- اضغط لاختيار الخدمة المطلوبة --</option>
-                
-                <optgroup label="🎮 ألعاب الفيديو">
-                    <option value="PUBG Mobile - شدات">ببجي موبايل (PUBG Mobile)</option>
-                    <option value="Free Fire - جواهر">فري فاير (Free Fire)</option>
-                    <option value="FC Points - نقاط">إي إيه سبورتس (FC Points)</option>
-                </optgroup>
-
-                <optgroup label="🎵 تيك توك (TikTok)">
-                    <option value="متابعين تيك توك">زيادة متابعين تيك توك</option>
-                    <option value="لايكات تيك توك">زيادة لايكات تيك توك</option>
-                    <option value="مشاهدات تيك توك">زيادة مشاهدات فيديو تيك توك</option>
-                </optgroup>
-
-                <optgroup label="📘 فيسبوك (Facebook)">
-                    <option value="متابعين صفحة/بروفايل فيسبوك">زيادة متابعين فيسبوك</option>
-                    <option value="لايكات منشور/ريلز فيسبوك">زيادة لايكات / تفاعل فيسبوك</option>
-                    <option value="مشاهدات فيديو فيسبوك">زيادة مشاهدات فيديو فيسبوك</option>
-                </optgroup>
-
-                <optgroup label="📸 إنستجرام (Instagram)">
-                    <option value="متابعين إنستجرام">زيادة متابعين إنستجرام</option>
-                    <option value="لايكات إنستجرام">زيادة لايكات إنستجرام</option>
-                    <option value="مشاهدات ريلز إنستجرام">زيادة مشاهدات ريلز إنستجرام</option>
-                </optgroup>
-
-                <optgroup label="▶️ يوتيوب (YouTube)">
-                    <option value="مشاهدات يوتيوب">زيادة مشاهدات يوتيوب</option>
-                    <option value="مشتركين قناة يوتيوب">زيادة مشتركين يوتيوب</option>
-                </optgroup>
-            </select>
-        </div>
-
-        <div class="pay-card">
-            <b>💳 طرق الدفع الرسمية المعتمدة:</b><br>
-            - InstaPay: <span class="pay-num">01001477719</span>[span_0](start_span)[span_0](end_span)<br>
-            - محفظة وبطاقات Telda[span_1](start_span)[span_1](end_span)<br>
-            <i style="color: #94a3b8; display: block; margin-top: 4px;">* برجاء إرسال صورة إيصال التحويل عبر الواتساب فور إتمام الطلب.</i>
-        </div>
-
-        <button type="submit" class="submit-btn">إرسال الطلب عبر الواتساب 📲</button>
-    </form>
-
-    <div class="footer-note">
-        جميع الحقوق محفوظة © Joks Store 2026
     </div>
+
+</div>
+
+<div class="footer">
+    جميع الحقوق محفوظة © JOKS STORE 2026
 </div>
 
 <script>
-    function sendOrderToWhatsApp(event) {
-        event.preventDefault();
-        
-        const name = document.getElementById('clientName').value;
-        const id = document.getElementById('clientID').value;
-        const service = document.getElementById('serviceSelect').value;
-        const adminPhone = "201001477719"; // رقم الواتساب الخاص بك[span_2](start_span)[span_2](end_span)
+    function showPackages(sectionName, packages) {
+        document.getElementById('homeView').style.display = 'none';
+        document.getElementById('packageView').style.display = 'block';
+        document.getElementById('selectedSectionTitle').innerText = "باقات " + sectionName;
 
-        const message = `مرحباً Joks Store، لدي طلب جديد:\n\n👤 اسم العميل: ${name}\n🔗 الرابط / الـ ID: ${id}\n🛒 الخدمة المطلوبة: ${service}\n\n💳 تم التحويل وجاهز إرسال الإيصال.`;
+        let listContainer = document.getElementById('packagesList');
+        listContainer.innerHTML = '';
+
+        packages.forEach(pkg => {
+            let card = document.createElement('div');
+            card.className = 'package-card';
+            let inputLabel = sectionName.includes('تيك توك') || sectionName.includes('انستجرام') ? 'رابط الحساب أو البوست:' : 'ايدى الحساب (ID):';
+            let inputPlaceholder = sectionName.includes('تيك توك') || sectionName.includes('انستجرام') ? 'اكتب الرابط هنا...' : 'أدخل الـ ID هنا...';
+
+            card.innerHTML = `
+                <h4>${pkg.name}</h4>
+                <p style="font-size: 11px; color: #9ca3af;">تنفيذ سريع ومضمون</p>
+                <div class="price">${pkg.price}</div>
+                
+                <div class="input-group" style="margin-top: 15px;">
+                    <label>${inputLabel}</label>
+                    <input type="text" id="input_${pkg.name.replace(/\s+/g, '_')}" placeholder="${inputPlaceholder}">
+                </div>
+
+                <button class="btn-red" style="width: 100%;" onclick="buyItem('${sectionName}', '${pkg.name}', '${pkg.price}')">تأكيد الطلب 🛒</button>
+            `;
+            listContainer.appendChild(card);
+        });
+        window.scrollTo(0, 0);
+    }
+
+    function goHome() {
+        document.getElementById('packageView').style.display = 'none';
+        document.getElementById('homeView').style.display = 'block';
+        window.scrollTo(0, 0);
+    }
+
+    function buyItem(category, pkgName, price) {
+        let inputId = 'input_' + pkgName.replace(/\s+/g, '_');
+        let userIdentifier = document.getElementById(inputId).value.trim();
+
+        if (!userIdentifier) {
+            alert('من فضلك ادخل البيانات المطلوبة (الـ ID أو الرابط) أولاً!');
+            return;
+        }
+
+        let adminPhone = "201001477719";[span_1](start_span)[span_1](end_span)
+        let message = `مرحباً Joks Store، أرجو تنفيذ الطلب الآتي:\n\n📂 القسم: ${category}\n📦 الخدمة/الباقة: ${pkgName}\n💰 السعر: ${price}\n📌 البيانات (ID/الرابط): ${userIdentifier}\n\n💳 تم الدفع وجاهز لإرسال الإيصال.`;
         
-        const whatsappUrl = `https://wa.me/${adminPhone}?text=${encodeURIComponent(message)}`;
+        let whatsappUrl = `https://wa.me/${adminPhone}?text=${encodeURIComponent(message)}`;
         window.open(whatsappUrl, '_blank');
     }
 </script>
